@@ -1,0 +1,20 @@
+{
+    "Total_Records": 320,
+    "Clean_Records": 312,
+    "Rejected Records": 8,
+    "Errors": [
+        "EOO7",
+        "E009",
+        "EOO8",
+        "E009",
+        "EOO7",
+        "E009",
+        "E009",
+        "E009",
+        "E009"
+    ],
+    "status": [
+        "SUCCESS"
+    ],
+    "timestamp": "2026-08-03T16:13:42.640436"
+}

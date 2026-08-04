@@ -1,0 +1,24 @@
+(.venv) ankitpanda@Ankits-MacBook-Air project % python3 tests/test_validation.py
+....FF
+======================================================================
+FAIL: test_negative_unit_cost_returns_error (__main__.TestValidation.test_negative_unit_cost_returns_error)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ankitpanda/Desktop/Python_Pipeline/project/tests/test_validation.py", line 59, in test_negative_unit_cost_returns_error
+    self.assertFalse(result,"check_required() should return True when all required fields are present.")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false : check_required() should return True when all required fields are present.
+
+======================================================================
+FAIL: test_valid_price_range_returns_true (__main__.TestValidation.test_valid_price_range_returns_true)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ankitpanda/Desktop/Python_Pipeline/project/tests/test_validation.py", line 67, in test_valid_price_range_returns_true
+    self.assertTrue(result,"check_range() should return True when all required fields are present.")
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : check_range() should return True when all required fields are present.
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.003s
+
+FAILED (failures=2)
