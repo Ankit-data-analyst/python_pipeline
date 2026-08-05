@@ -5,12 +5,30 @@ import csv
 from config import CLEAN_DEALER_FILE,CLEAN_PRODUCT_FILE,CLEAN_INVENTORY_FILE, HOST, USER_DATABASE, PORT
 from functools import wraps
 import time
+from datetime import datetime
 from logger import log_error,log_info,log_warning
 # CONFIGURATION OF VARIABLES AND CONNECTION WITH POSTGRESQL
 load_dotenv()
 
- 
+def safe_date_dmy(value):
+    if value is None or value.strip() == "":
+        return None
+    return datetime.strptime(value, "%d-%m-%Y").date()
 
+def safe_date_ymd(value):
+    if value is None or value.strip() == "":
+        return None
+    return datetime.strptime(value, "%Y-%m-%d").date()
+
+def safe_int_load(value):
+    if value is None or value.strip() == "":
+        return None
+    return int(value)
+
+def safe_float_load(value):
+    if value is None or value.strip() == "":
+        return None
+    return float(value)
 
 # Retry Resilience Function 
 def retry(max_attempts=3, delay=2):
@@ -56,18 +74,21 @@ def connect_database():
 # RECORD THE LOAD TRACKING TABLE
 def load_tracking(file_name,file_hash):
     
-    def record_processing(cursor, file_name, file_hash):
-        cursor.execute(
-            """INSERT INTO load_tracking 
-            (file_name, file_hash, processed_timestamp) 
-            VALUES (%s, %s, NOW())""",
-            (file_name, file_hash)
-        )
-    conn = connect_database()
-    cursor = conn.cursor()
-    record_processing(cursor,file_name,file_hash)
-
-
+    try:
+        with connect_database() as conn:
+            with conn.cursor() as cursor:
+                cursor.execute(
+                    """INSERT INTO load_tracking 
+                    (file_name, file_hash, processed_timestamp) 
+                    VALUES (%s, %s, NOW())""",
+                    (file_name, file_hash)
+                )
+                conn.commit()
+                log_info(f"STAGE = LOAD | Loading data into load tracking table")
+    except Exception as e:
+        conn.rollback()
+        log_error(f"STAGE = LOAD | ERROR RECORDING LOAD TRACKING: {e}")
+        raise
 #--------------------------------------
 #------------__DEALER LOAD___----------
 #---------------------------------------
@@ -94,14 +115,15 @@ def insert_dealer():
                 rows = csv.DictReader(f_read)
                 for row in rows:
                     insert_into_dealer(connection,
-                                       row.get('dealer_id'),row.get('dealer_code'),
+                                       safe_int_load(row.get('dealer_id')),row.get('dealer_code'),
                                        row.get('dealer_name'),row.get('city'),
                                        row.get('state'),row.get('region'),
-                                       row.get('dealer_type'),row.get('created_date'),
+                                       row.get('dealer_type'),safe_date_ymd(row.get('created_date')),
                                        row.get('is_active'),row.get('email'),
                                        row.get('phone'),row.get('credit_terms_days'))
             connection.commit()
             log_info(f'STAGE = LOAD | SUCCESSFULLY LOADED DATA INTO DEALER TABLE')
+            
         except Exception as e:
             connection.rollback()
             log_error(f'STAGE = LOAD | ERROR IN LOADING DATA {e}')
@@ -116,9 +138,7 @@ def insert_dealer():
 
 def insert_product():
     
-    connection = connect_database()
     batch_size = 200
-    cursor = connection.cursor()
     product_data = []
     log_info(f'STAGE = LOAD | LOADING DATA INTO PRODUCTS TABLE')
     try: 
@@ -128,6 +148,7 @@ def insert_product():
                 product_data.append(row)
     except Exception as e:
         log_error(f'STAGE = LOAD |  ERROR READING PRODUCT CSV FILE  ')
+        raise
         
     sql = """
         INSERT INTO PRODUCTS(product_id,sku,product_name,category,subcategory,brand,uom,unit_cost,unit_price,weight_kg,is_discontinued,created_date)
@@ -138,33 +159,31 @@ def insert_product():
         batch = product_data[i:batch_size+i]
         batch_tuples = [
             (
-                row.get('product_id'),
+                safe_int_load(row.get('product_id')),
                 row.get('sku'),
                 row.get('product_name'),
                 row.get('category'),
                 row.get('subcategory'),
                 row.get('brand'),
                 row.get('uom'),
-                row.get('unit_cost'),
-                row.get('unit_price'),
-                row.get('weight_kg'),
+                safe_float_load(row.get('unit_cost')),
+                safe_float_load(row.get('unit_price')),
+                safe_float_load(row.get('weight_kg')),
                 row.get('is_discontinued'),
-                row.get('created_date')
+                safe_date_ymd(row.get('created_date'))
             )
             for row in batch
         ]
-        try:
-            cursor.executemany(sql,batch_tuples)
-            connection.commit()
-            log_info(f"Batch {i // batch_size + 1}: Inserted {len(batch)} rows")
-
-                
-        except Exception as e:
-            connection.rollback()
-            log_error(f'STAGE = LOAD | ERROR LOADING DATA {e}')
-            raise
-    cursor.close()
-    connection.close()
+        with connect_database() as connection:
+            with connection.cursor() as cursor:
+                try:
+                    
+                            cursor.executemany(sql,batch_tuples)
+                            connection.commit()
+                except Exception as e:
+                    connection.rollback()
+                    log_error(f'STAGE = LOAD | ERROR LOADING DATA {e}')
+                    raise
 # insert_product()
 
 #--------------------------------------
@@ -173,9 +192,7 @@ def insert_product():
 
 def insert_inventory():
     
-    connection = connect_database()
     batch_size = 200
-    cursor = connection.cursor()
     inventory_data = []
     
     try: 
@@ -185,41 +202,42 @@ def insert_inventory():
                 inventory_data.append(row)
     except Exception as e:
         log_info(f'STAGE = LOAD | ERROR READING INVENTORY CSV FILE')
+        raise
         
     sql = """
         INSERT INTO INVENTORY(inventory_id,snapshot_date,dealer_id,product_id,on_hand_qty,on_order_qty,reorder_point,reorder_qty,last_restock_date,last_sale_date)
-        VALUES (%s,to_date(%s,'DD-MM-YYYY'),%s,%s,%s,%s,%s,%s,to_date(%s,'DD-MM-YYYY'),to_date(%s,'DD-MM-YYYY')) 
+        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) 
     """
 
     log_info(f'STAGE = LOAD | LOADING DATA INTO INVENTORY TABLE')
-    for i in range(0,len(inventory_data),batch_size):
-        batch = inventory_data[i:batch_size+i]
-        batch_tuples = [
-            (
-                row.get('inventory_id'),
-                row.get('snapshot_date'),
-                row.get('dealer_id'),
-                row.get('product_id'),
-                row.get('on_hand_qty'),
-                row.get('on_order_qty'),
-                row.get('reorder_point'),
-                row.get('reorder_qty'),
-                row.get('last_restock_date'),
-                row.get('last_sale_date')
-            )
-            for row in batch
-        ]
-        try:
-            cursor.executemany(sql,batch_tuples)
-            connection.commit()
-            log_info(f"Batch {i // batch_size + 1}: Inserted {len(batch)} rows")
-            log_info(f'STAGE = LOAD | SUCCESSFULLY LOADED DATA INTO INVENTORY TABLE')
+    with connect_database() as connection:
+        with connection.cursor() as cursor:
+            for i in range(0,len(inventory_data),batch_size):
+                batch = inventory_data[i:batch_size+i]
+                batch_tuples = [
+                    (
+                        row.get('inventory_id'),
+                        safe_date_dmy(row.get('snapshot_date')),
+                        safe_int_load(row.get('dealer_id')),
+                        safe_int_load(row.get('product_id')),
+                        safe_int_load(row.get('on_hand_qty')),
+                        safe_int_load(row.get('on_order_qty')),
+                        safe_int_load(row.get('reorder_point')),
+                        safe_int_load(row.get('reorder_qty')),
+                        safe_date_dmy(row.get('last_restock_date')),
+                        safe_date_dmy(row.get('last_sale_date'))
+                    )
+                    for row in batch
+                ]
+                try:
+                    
+                            cursor.executemany(sql,batch_tuples)
+                            connection.commit()
+                            log_info(f"Batch {i // batch_size + 1}: Inserted {len(batch)} rows")
+                            log_info(f'STAGE = LOAD | SUCCESSFULLY LOADED DATA INTO INVENTORY TABLE')
+                except Exception as e:
+                    connection.rollback()
+                    log_error(f'STAGE = LOAD | ERROR IN LOADIND DATA {e}')
+                    raise
 
-        
-        except Exception as e:
-            connection.rollback()
-            log_error(f'STAGE = LOAD | ERROR IN LOADIND DATA {e}')
-            raise
-    cursor.close()
-    connection.close()
 # insert_inventory()

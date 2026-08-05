@@ -36,7 +36,7 @@ def main():
         else:
             transform_dealer()
             insert_dealer()
-            load_tracking(dealer_hash,file_name)
+            load_tracking(file_name,dealer_hash)
         
 
         log_info("Running pipeline completed for dealers")

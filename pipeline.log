@@ -1,144 +1,151 @@
-2026-08-05 09:13:30,626 | logger | Pipeline Started
-2026-08-05 09:13:30,626 | logger | Starting Pipeline for DEALER TABLE
-2026-08-05 09:13:30,626 | logger | STAGE = INGEST | CONNECTION TO S3
-2026-08-05 09:13:30,716 | logger | STAGE = INGEST | CONNECTION WITH S3 ESTABLISHED SUCCESSFULLY
-2026-08-05 09:13:30,716 | logger | STAGE = INGEST | DOWNLOADING FILE:dirty/dealer.csv
-2026-08-05 09:13:32,161 | logger | STAGE = INGEST | SUCCESSFULLY DOWNLOADED dirty/dealer.csv
-2026-08-05 09:13:32,162 | logger | STAGE = INGEST | Generating file hash for /Users/ankitpanda/Desktop/Python_Pipeline/project/data/raw_data/dealer_downloaded.csv
-2026-08-05 09:13:32,162 | logger | STAGE = INGEST | ESTABLISHING CONNECTION WITH THE DATABASE
-2026-08-05 09:13:32,196 | logger | STAGE = INGEST | CONNECTION ESTABLISHED SUCCESSFULLY
-2026-08-05 09:13:32,196 | logger | STAGE = INGEST | Checking if /Users/ankitpanda/Desktop/Python_Pipeline/project/data/raw_data/dealer_downloaded.csv is already processed
-2026-08-05 09:13:32,200 | logger | STAGE = TRANSFORM | CREATING CLEAN AND REJECTED RECORDS FOR DEALER FILE
-2026-08-05 09:13:32,201 | logger | STAGE = TRANSFORM | VALIDATING DEALER RECORDS
-2026-08-05 09:13:32,202 | logger | STAGE = TRANSFORM | dealer_name is missing
-2026-08-05 09:13:32,203 | logger | STAGE = TRANSFORM | SUCCESSFULLY VALIDATED DEALER RECORDS
-2026-08-05 09:13:32,203 | logger | STAGE = TRANSFORM | SUCCESSFULLY CREATED CLEAN AND REJECTED RECORDS FOR DEALER FILE
-2026-08-05 09:13:32,214 | logger | STAGE = LOAD | LOADING DATA INTO DEALER TABLE
-2026-08-05 09:13:32,235 | logger | STAGE = LOAD | SUCCESSFULLY LOADED DATA INTO DEALER TABLE
-2026-08-05 09:13:32,246 | logger | Running pipeline completed for dealers
-2026-08-05 09:13:32,246 | logger | [TIMER] DEALER PIPELINE: 1.62s
-2026-08-05 09:13:32,246 | logger | Starting Pipeline for PRODUCTS TABLE
-2026-08-05 09:13:32,246 | logger | STAGE = INGEST | CONNECTION TO S3
-2026-08-05 09:13:32,249 | logger | STAGE = INGEST | CONNECTION WITH S3 ESTABLISHED SUCCESSFULLY
-2026-08-05 09:13:32,249 | logger | STAGE = INGEST | DOWNLOADING FILE:dirty/product.csv
-2026-08-05 09:13:33,722 | logger | STAGE = INGEST | SUCCESSFULLY DOWNLOADED dirty/product.csv
-2026-08-05 09:13:33,725 | logger | STAGE = INGEST | Generating file hash for /Users/ankitpanda/Desktop/Python_Pipeline/project/data/raw_data/product_downloaded.csv
-2026-08-05 09:13:33,725 | logger | STAGE = INGEST | ESTABLISHING CONNECTION WITH THE DATABASE
-2026-08-05 09:13:33,742 | logger | STAGE = INGEST | CONNECTION ESTABLISHED SUCCESSFULLY
-2026-08-05 09:13:33,743 | logger | STAGE = INGEST | Checking if /Users/ankitpanda/Desktop/Python_Pipeline/project/data/raw_data/product_downloaded.csv is already processed
-2026-08-05 09:13:33,748 | logger | STAGE = TRANSFORM | CREATING CLEAN AND REJECTED RECORDS FOR PRODUCT FILE
-2026-08-05 09:13:33,748 | logger | STAGE = TRANSFORM | VALIDATING PRODUCT RECORDS
-2026-08-05 09:13:33,749 | logger | STAGE = TRANSFORM | sku IS MISSING
-2026-08-05 09:13:33,750 | logger | STAGE = TRANSFORM | NA IS NOT AVAILABLE
-2026-08-05 09:13:33,750 | logger | STAGE = TRANSFORM | product_name IS MISSING
-2026-08-05 09:13:33,751 | logger | STAGE = TRANSFORM | NA IS NOT AVAILABLE
-2026-08-05 09:13:33,753 | logger | STAGE = TRANSFORM | sku IS MISSING
-2026-08-05 09:13:33,754 | logger | STAGE = TRANSFORM | 12,50 is not float
-2026-08-05 09:13:33,754 | logger | STAGE = TRANSFORM | 12,50 is not float
-2026-08-05 09:13:33,754 | logger | STAGE = TRANSFORM | NA IS NOT AVAILABLE
-2026-08-05 09:13:33,755 | logger | STAGE = TRANSFORM | NA IS NOT AVAILABLE
-2026-08-05 09:13:33,756 | logger | STAGE = TRANSFORM | SUCCESSFULLY VALIDATED PRODUCT RECORDS
-2026-08-05 09:13:33,756 | logger | STAGE = TRANSFORM | SUCCESSFULLY CLEAN AND REJECTED RECORDS FOR PRODUCT FILE
-2026-08-05 09:13:33,774 | logger | STAGE = LOAD | LOADING DATA INTO PRODUCTS TABLE
-2026-08-05 09:13:33,818 | logger | Batch 1: Inserted 200 rows
-2026-08-05 09:13:33,829 | logger | Batch 2: Inserted 112 rows
-2026-08-05 09:13:33,838 | logger | Running pipeline completed for products
-2026-08-05 09:13:33,838 | logger | [TIMER] PRODUCT PIPELINE: 1.59s
-2026-08-05 09:13:33,838 | logger | Starting Pipeline for INVENTORY TABLE
-2026-08-05 09:13:33,838 | logger | STAGE = INGEST | CONNECTION TO S3
-2026-08-05 09:13:33,842 | logger | STAGE = INGEST | CONNECTION WITH S3 ESTABLISHED SUCCESSFULLY
-2026-08-05 09:13:33,842 | logger | STAGE = INGEST | DOWNLOADING FILE:dirty/inventory.csv
-2026-08-05 09:13:35,440 | logger | STAGE = INGEST | SUCCESSFULLY DOWNLOADED dirty/inventory.csv
-2026-08-05 09:13:35,443 | logger | STAGE = INGEST | Generating file hash for /Users/ankitpanda/Desktop/Python_Pipeline/project/data/raw_data/inventory_downloaded.csv
-2026-08-05 09:13:35,443 | logger | STAGE = INGEST | ESTABLISHING CONNECTION WITH THE DATABASE
-2026-08-05 09:13:35,461 | logger | STAGE = INGEST | CONNECTION ESTABLISHED SUCCESSFULLY
-2026-08-05 09:13:35,461 | logger | STAGE = INGEST | Checking if /Users/ankitpanda/Desktop/Python_Pipeline/project/data/raw_data/inventory_downloaded.csv is already processed
-2026-08-05 09:13:35,468 | logger | STAGE = TRANSFORM | CREATING CLEAN AND REJECTED RECORDS FOR INVENTORY
-2026-08-05 09:13:35,469 | logger | STAGE = TRANSFORM | VALIDATING INVENTORY RECORDS
-2026-08-05 09:13:35,529 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:35,540 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:35,543 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:35,550 | logger | STAGE = TRANSFORM | INVALID RANGE FOR -4
-2026-08-05 09:13:35,559 | logger | STAGE = TRANSFORM | INVALID RANGE FOR -15
-2026-08-05 09:13:35,583 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:35,590 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:35,646 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:35,646 | logger | STAGE = TRANSFORM | INVALID VALUE FOR on_hand_qty: 10 units
-2026-08-05 09:13:35,672 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:35,675 | logger | STAGE = TRANSFORM | INVALID VALUE FOR on_hand_qty: 10 units
-2026-08-05 09:13:35,708 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:35,743 | logger | STAGE = TRANSFORM | dealer_id is missing in DEALER Table
-2026-08-05 09:13:35,751 | logger | STAGE = TRANSFORM | INVALID RANGE FOR -1
-2026-08-05 09:13:35,788 | logger | STAGE = TRANSFORM | INVALID RANGE FOR -10
-2026-08-05 09:13:35,814 | logger | STAGE = TRANSFORM | INVALID VALUE FOR on_hand_qty: 10 units
-2026-08-05 09:13:35,818 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:35,826 | logger | STAGE = TRANSFORM | INVALID VALUE FOR on_hand_qty: 10 units
-2026-08-05 09:13:35,828 | logger | STAGE = TRANSFORM | INVALID RANGE FOR -8
-2026-08-05 09:13:35,834 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:35,835 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:35,836 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:35,858 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:35,880 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:35,881 | logger | STAGE = TRANSFORM | INVALID VALUE FOR on_hand_qty: 10 units
-2026-08-05 09:13:35,884 | logger | STAGE = TRANSFORM | INVALID RANGE FOR -19
-2026-08-05 09:13:35,886 | logger | STAGE = TRANSFORM | INVALID RANGE FOR -14
-2026-08-05 09:13:35,890 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:35,901 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:35,907 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:35,924 | logger | STAGE = TRANSFORM | dealer_id is missing in DEALER Table
-2026-08-05 09:13:35,933 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:35,941 | logger | STAGE = TRANSFORM | INVALID RANGE FOR -19
-2026-08-05 09:13:35,949 | logger | STAGE = TRANSFORM | INVALID VALUE FOR on_hand_qty: 10 units
-2026-08-05 09:13:35,965 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:35,973 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:35,990 | logger | STAGE = TRANSFORM | INVALID VALUE FOR on_hand_qty: 10 units
-2026-08-05 09:13:36,006 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:36,008 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:36,019 | logger | STAGE = TRANSFORM | INVALID RANGE FOR -8
-2026-08-05 09:13:36,024 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:36,037 | logger | STAGE = TRANSFORM | INVALID VALUE FOR on_hand_qty: 10 units
-2026-08-05 09:13:36,045 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:36,058 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:36,063 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:36,065 | logger | STAGE = TRANSFORM | dealer_id is missing in DEALER Table
-2026-08-05 09:13:36,074 | logger | STAGE = TRANSFORM | INVALID RANGE FOR -15
-2026-08-05 09:13:36,089 | logger | STAGE = TRANSFORM | INVALID RANGE FOR -17
-2026-08-05 09:13:36,113 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:36,123 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:36,135 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
-2026-08-05 09:13:36,150 | logger | STAGE = TRANSFORM | VALIDATION COMPLETED FOR INVENTORY RECORDS
-2026-08-05 09:13:36,150 | logger | STAGE = TRANSFORM | SUCCESSFULLY CREATED CLEAN AND REJECTED RECORDS FOR INVENTORY
-2026-08-05 09:13:36,163 | logger | STAGE = LOAD | LOADING DATA INTO INVENTORY TABLE
-2026-08-05 09:13:36,204 | logger | Batch 1: Inserted 200 rows
-2026-08-05 09:13:36,204 | logger | STAGE = LOAD | SUCCESSFULLY LOADED DATA INTO INVENTORY TABLE
-2026-08-05 09:13:36,217 | logger | Batch 2: Inserted 200 rows
-2026-08-05 09:13:36,217 | logger | STAGE = LOAD | SUCCESSFULLY LOADED DATA INTO INVENTORY TABLE
-2026-08-05 09:13:36,228 | logger | Batch 3: Inserted 200 rows
-2026-08-05 09:13:36,228 | logger | STAGE = LOAD | SUCCESSFULLY LOADED DATA INTO INVENTORY TABLE
-2026-08-05 09:13:36,238 | logger | Batch 4: Inserted 200 rows
-2026-08-05 09:13:36,238 | logger | STAGE = LOAD | SUCCESSFULLY LOADED DATA INTO INVENTORY TABLE
-2026-08-05 09:13:36,241 | logger | Batch 5: Inserted 49 rows
-2026-08-05 09:13:36,241 | logger | STAGE = LOAD | SUCCESSFULLY LOADED DATA INTO INVENTORY TABLE
-2026-08-05 09:13:36,247 | logger | Running pipeline completed for inventory
-2026-08-05 09:13:36,247 | logger | [TIMER] INVENTORY TABLE: 2.41s
-2026-08-05 09:13:36,247 | logger | STAGE = INGEST | CONNECTION TO S3
-2026-08-05 09:13:36,250 | logger | STAGE = INGEST | CONNECTION WITH S3 ESTABLISHED SUCCESSFULLY
-2026-08-05 09:13:36,250 | logger | STAGE = INGEST | DOWNLOADING FILE:dirty/sales_logs.jsonl
-2026-08-05 09:13:38,821 | logger | STAGE = INGEST | SUCCESSFULLY DOWNLOADED dirty/sales_logs.jsonl
-2026-08-05 09:13:38,823 | logger | STAGE = TRANSFORM | CREATING CLEAN AND REJECTED LOGS FOR SALES LOGS
-2026-08-05 09:13:38,828 | logger | [VALIDATION ERROR] Line 170: Missing dealer_id
-2026-08-05 09:13:38,832 | logger | [VALIDATION ERROR] Line 408: Missing dealer_id
-2026-08-05 09:13:38,833 | logger | [VALIDATION ERROR] Line 456: Missing dealer_id
-2026-08-05 09:13:38,834 | logger | [JSON ERROR] Line 506: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
-2026-08-05 09:13:38,835 | logger | [VALIDATION ERROR] Line 553: Missing product_id
-2026-08-05 09:13:38,836 | logger | [VALIDATION ERROR] Line 599: Missing product_id
-2026-08-05 09:13:38,837 | logger | [VALIDATION ERROR] Line 686: Missing product_id
-2026-08-05 09:13:38,838 | logger | [VALIDATION ERROR] Line 722: Missing dealer_id
-2026-08-05 09:13:38,840 | logger | [JSON ERROR] Line 904: Expecting ',' delimiter: line 2 column 1 (char 246)
-2026-08-05 09:13:38,841 | logger | [JSON ERROR] Line 984: Expecting ',' delimiter: line 2 column 1 (char 246)
-2026-08-05 09:13:38,843 | logger | [VALIDATION ERROR] Line 1106: Missing dealer_id
-2026-08-05 09:13:38,844 | logger | [VALIDATION ERROR] Line 1240: Missing product_id
-2026-08-05 09:13:38,847 | logger | [VALIDATION ERROR] Line 1434: Missing dealer_id
-2026-08-05 09:13:38,848 | logger | STAGE = TRANSFORM | SUCCESSFULLY CREATED CLEAN AND REJECTED SALES LOGS
-2026-08-05 09:13:38,848 | logger | [INFO] PIPELINE COMPLETED SUCCESSFULLY
-2026-08-05 09:13:38,848 | logger | [TIMER] Total execution: 8.22s
+2026-08-05 12:55:02,492 | logger | Pipeline Started
+2026-08-05 12:55:02,492 | logger | Starting Pipeline for DEALER TABLE
+2026-08-05 12:55:02,492 | logger | STAGE = INGEST | CONNECTION TO S3
+2026-08-05 12:55:02,583 | logger | STAGE = INGEST | CONNECTION WITH S3 ESTABLISHED SUCCESSFULLY
+2026-08-05 12:55:02,584 | logger | STAGE = INGEST | DOWNLOADING FILE:dirty/dealer.csv
+2026-08-05 12:55:03,664 | logger | STAGE = INGEST | SUCCESSFULLY DOWNLOADED dirty/dealer.csv
+2026-08-05 12:55:03,667 | logger | STAGE = INGEST | Generating file hash for /Users/ankitpanda/Desktop/Python_Pipeline/project/data/raw_data/dealer_downloaded.csv
+2026-08-05 12:55:03,667 | logger | STAGE = INGEST | ESTABLISHING CONNECTION WITH THE DATABASE
+2026-08-05 12:55:03,715 | logger | STAGE = INGEST | CONNECTION ESTABLISHED SUCCESSFULLY
+2026-08-05 12:55:03,715 | logger | STAGE = INGEST | Checking if /Users/ankitpanda/Desktop/Python_Pipeline/project/data/raw_data/dealer_downloaded.csv is already processed
+2026-08-05 12:55:03,721 | logger | STAGE = TRANSFORM | CREATING CLEAN AND REJECTED RECORDS FOR DEALER FILE
+2026-08-05 12:55:03,721 | logger | STAGE = TRANSFORM | VALIDATING DEALER RECORDS
+2026-08-05 12:55:03,724 | logger | STAGE = TRANSFORM | dealer_name is missing
+2026-08-05 12:55:03,724 | logger | STAGE = TRANSFORM | SUCCESSFULLY VALIDATED DEALER RECORDS
+2026-08-05 12:55:03,725 | logger | STAGE = TRANSFORM | SUCCESSFULLY CREATED CLEAN AND REJECTED RECORDS FOR DEALER FILE
+2026-08-05 12:55:03,738 | logger | STAGE = LOAD | LOADING DATA INTO DEALER TABLE
+2026-08-05 12:55:03,761 | logger | STAGE = LOAD | SUCCESSFULLY LOADED DATA INTO DEALER TABLE
+2026-08-05 12:55:03,775 | logger | STAGE = LOAD | Loading data into load tracking table
+2026-08-05 12:55:03,775 | logger | Running pipeline completed for dealers
+2026-08-05 12:55:03,775 | logger | [TIMER] DEALER PIPELINE: 1.28s
+2026-08-05 12:55:03,775 | logger | Starting Pipeline for PRODUCTS TABLE
+2026-08-05 12:55:03,776 | logger | STAGE = INGEST | CONNECTION TO S3
+2026-08-05 12:55:03,780 | logger | STAGE = INGEST | CONNECTION WITH S3 ESTABLISHED SUCCESSFULLY
+2026-08-05 12:55:03,780 | logger | STAGE = INGEST | DOWNLOADING FILE:dirty/product.csv
+2026-08-05 12:55:05,099 | logger | STAGE = INGEST | SUCCESSFULLY DOWNLOADED dirty/product.csv
+2026-08-05 12:55:05,100 | logger | STAGE = INGEST | Generating file hash for /Users/ankitpanda/Desktop/Python_Pipeline/project/data/raw_data/product_downloaded.csv
+2026-08-05 12:55:05,100 | logger | STAGE = INGEST | ESTABLISHING CONNECTION WITH THE DATABASE
+2026-08-05 12:55:05,114 | logger | STAGE = INGEST | CONNECTION ESTABLISHED SUCCESSFULLY
+2026-08-05 12:55:05,114 | logger | STAGE = INGEST | Checking if /Users/ankitpanda/Desktop/Python_Pipeline/project/data/raw_data/product_downloaded.csv is already processed
+2026-08-05 12:55:05,119 | logger | STAGE = TRANSFORM | CREATING CLEAN AND REJECTED RECORDS FOR PRODUCT FILE
+2026-08-05 12:55:05,121 | logger | STAGE = TRANSFORM | VALIDATING PRODUCT RECORDS
+2026-08-05 12:55:05,121 | logger | STAGE = TRANSFORM | sku IS MISSING
+2026-08-05 12:55:05,122 | logger | STAGE = TRANSFORM | NA IS NOT AVAILABLE
+2026-08-05 12:55:05,122 | logger | STAGE = TRANSFORM | product_name IS MISSING
+2026-08-05 12:55:05,123 | logger | STAGE = TRANSFORM | NA IS NOT AVAILABLE
+2026-08-05 12:55:05,124 | logger | STAGE = TRANSFORM | sku IS MISSING
+2026-08-05 12:55:05,125 | logger | STAGE = TRANSFORM | 12,50 is not float
+2026-08-05 12:55:05,125 | logger | STAGE = TRANSFORM | 12,50 is not float
+2026-08-05 12:55:05,125 | logger | STAGE = TRANSFORM | NA IS NOT AVAILABLE
+2026-08-05 12:55:05,126 | logger | STAGE = TRANSFORM | NA IS NOT AVAILABLE
+2026-08-05 12:55:05,127 | logger | STAGE = TRANSFORM | SUCCESSFULLY VALIDATED PRODUCT RECORDS
+2026-08-05 12:55:05,127 | logger | STAGE = TRANSFORM | SUCCESSFULLY CLEAN AND REJECTED RECORDS FOR PRODUCT FILE
+2026-08-05 12:55:05,127 | logger | STAGE = LOAD | LOADING DATA INTO PRODUCTS TABLE
+2026-08-05 12:55:05,209 | logger | STAGE = LOAD | Loading data into load tracking table
+2026-08-05 12:55:05,210 | logger | Running pipeline completed for products
+2026-08-05 12:55:05,210 | logger | [TIMER] PRODUCT PIPELINE: 1.43s
+2026-08-05 12:55:05,210 | logger | Starting Pipeline for INVENTORY TABLE
+2026-08-05 12:55:05,210 | logger | STAGE = INGEST | CONNECTION TO S3
+2026-08-05 12:55:05,213 | logger | STAGE = INGEST | CONNECTION WITH S3 ESTABLISHED SUCCESSFULLY
+2026-08-05 12:55:05,213 | logger | STAGE = INGEST | DOWNLOADING FILE:dirty/inventory.csv
+2026-08-05 12:55:07,097 | logger | STAGE = INGEST | SUCCESSFULLY DOWNLOADED dirty/inventory.csv
+2026-08-05 12:55:07,101 | logger | STAGE = INGEST | Generating file hash for /Users/ankitpanda/Desktop/Python_Pipeline/project/data/raw_data/inventory_downloaded.csv
+2026-08-05 12:55:07,101 | logger | STAGE = INGEST | ESTABLISHING CONNECTION WITH THE DATABASE
+2026-08-05 12:55:07,118 | logger | STAGE = INGEST | CONNECTION ESTABLISHED SUCCESSFULLY
+2026-08-05 12:55:07,118 | logger | STAGE = INGEST | Checking if /Users/ankitpanda/Desktop/Python_Pipeline/project/data/raw_data/inventory_downloaded.csv is already processed
+2026-08-05 12:55:07,125 | logger | STAGE = TRANSFORM | CREATING CLEAN AND REJECTED RECORDS FOR INVENTORY
+2026-08-05 12:55:07,127 | logger | STAGE = TRANSFORM | VALIDATING INVENTORY RECORDS
+2026-08-05 12:55:07,187 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,197 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,201 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,208 | logger | STAGE = TRANSFORM | INVALID RANGE FOR -4
+2026-08-05 12:55:07,217 | logger | STAGE = TRANSFORM | INVALID RANGE FOR -15
+2026-08-05 12:55:07,240 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,248 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,303 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,304 | logger | STAGE = TRANSFORM | INVALID VALUE FOR on_hand_qty: 10 units
+2026-08-05 12:55:07,330 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,333 | logger | STAGE = TRANSFORM | INVALID VALUE FOR on_hand_qty: 10 units
+2026-08-05 12:55:07,366 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,401 | logger | STAGE = TRANSFORM | dealer_id is missing in DEALER Table
+2026-08-05 12:55:07,408 | logger | STAGE = TRANSFORM | INVALID RANGE FOR -1
+2026-08-05 12:55:07,446 | logger | STAGE = TRANSFORM | INVALID RANGE FOR -10
+2026-08-05 12:55:07,472 | logger | STAGE = TRANSFORM | INVALID VALUE FOR on_hand_qty: 10 units
+2026-08-05 12:55:07,477 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,484 | logger | STAGE = TRANSFORM | INVALID VALUE FOR on_hand_qty: 10 units
+2026-08-05 12:55:07,487 | logger | STAGE = TRANSFORM | INVALID RANGE FOR -8
+2026-08-05 12:55:07,492 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,493 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,494 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,516 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,539 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,539 | logger | STAGE = TRANSFORM | INVALID VALUE FOR on_hand_qty: 10 units
+2026-08-05 12:55:07,542 | logger | STAGE = TRANSFORM | INVALID RANGE FOR -19
+2026-08-05 12:55:07,544 | logger | STAGE = TRANSFORM | INVALID RANGE FOR -14
+2026-08-05 12:55:07,548 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,560 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,565 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,582 | logger | STAGE = TRANSFORM | dealer_id is missing in DEALER Table
+2026-08-05 12:55:07,591 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,598 | logger | STAGE = TRANSFORM | INVALID RANGE FOR -19
+2026-08-05 12:55:07,607 | logger | STAGE = TRANSFORM | INVALID VALUE FOR on_hand_qty: 10 units
+2026-08-05 12:55:07,623 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,631 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,647 | logger | STAGE = TRANSFORM | INVALID VALUE FOR on_hand_qty: 10 units
+2026-08-05 12:55:07,664 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,665 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,677 | logger | STAGE = TRANSFORM | INVALID RANGE FOR -8
+2026-08-05 12:55:07,681 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,694 | logger | STAGE = TRANSFORM | INVALID VALUE FOR on_hand_qty: 10 units
+2026-08-05 12:55:07,702 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,715 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,720 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,722 | logger | STAGE = TRANSFORM | dealer_id is missing in DEALER Table
+2026-08-05 12:55:07,731 | logger | STAGE = TRANSFORM | INVALID RANGE FOR -15
+2026-08-05 12:55:07,746 | logger | STAGE = TRANSFORM | INVALID RANGE FOR -17
+2026-08-05 12:55:07,770 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,781 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,792 | logger | STAGE = TRANSFORM | product_id is missing in PRODUCTS Table
+2026-08-05 12:55:07,807 | logger | STAGE = TRANSFORM | VALIDATION COMPLETED FOR INVENTORY RECORDS
+2026-08-05 12:55:07,807 | logger | STAGE = TRANSFORM | SUCCESSFULLY CREATED CLEAN AND REJECTED RECORDS FOR INVENTORY
+2026-08-05 12:55:07,809 | logger | STAGE = LOAD | LOADING DATA INTO INVENTORY TABLE
+2026-08-05 12:55:07,858 | logger | Batch 1: Inserted 200 rows
+2026-08-05 12:55:07,858 | logger | STAGE = LOAD | SUCCESSFULLY LOADED DATA INTO INVENTORY TABLE
+2026-08-05 12:55:07,874 | logger | Batch 2: Inserted 200 rows
+2026-08-05 12:55:07,874 | logger | STAGE = LOAD | SUCCESSFULLY LOADED DATA INTO INVENTORY TABLE
+2026-08-05 12:55:07,886 | logger | Batch 3: Inserted 200 rows
+2026-08-05 12:55:07,886 | logger | STAGE = LOAD | SUCCESSFULLY LOADED DATA INTO INVENTORY TABLE
+2026-08-05 12:55:07,902 | logger | Batch 4: Inserted 200 rows
+2026-08-05 12:55:07,902 | logger | STAGE = LOAD | SUCCESSFULLY LOADED DATA INTO INVENTORY TABLE
+2026-08-05 12:55:07,905 | logger | Batch 5: Inserted 49 rows
+2026-08-05 12:55:07,905 | logger | STAGE = LOAD | SUCCESSFULLY LOADED DATA INTO INVENTORY TABLE
+2026-08-05 12:55:07,911 | logger | STAGE = LOAD | Loading data into load tracking table
+2026-08-05 12:55:07,911 | logger | Running pipeline completed for inventory
+2026-08-05 12:55:07,912 | logger | [TIMER] INVENTORY TABLE: 2.70s
+2026-08-05 12:55:07,912 | logger | STAGE = INGEST | CONNECTION TO S3
+2026-08-05 12:55:07,914 | logger | STAGE = INGEST | CONNECTION WITH S3 ESTABLISHED SUCCESSFULLY
+2026-08-05 12:55:07,914 | logger | STAGE = INGEST | DOWNLOADING FILE:dirty/sales_logs.jsonl
+2026-08-05 12:55:09,965 | logger | STAGE = INGEST | SUCCESSFULLY DOWNLOADED dirty/sales_logs.jsonl
+2026-08-05 12:55:09,966 | logger | STAGE = TRANSFORM | CREATING CLEAN AND REJECTED LOGS FOR SALES LOGS
+2026-08-05 12:55:09,969 | logger | [VALIDATION ERROR] Line 170: Missing dealer_id
+2026-08-05 12:55:09,971 | logger | [VALIDATION ERROR] Line 408: Missing dealer_id
+2026-08-05 12:55:09,972 | logger | [VALIDATION ERROR] Line 456: Missing dealer_id
+2026-08-05 12:55:09,972 | logger | [JSON ERROR] Line 506: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+2026-08-05 12:55:09,973 | logger | [VALIDATION ERROR] Line 553: Missing product_id
+2026-08-05 12:55:09,973 | logger | [VALIDATION ERROR] Line 599: Missing product_id
+2026-08-05 12:55:09,974 | logger | [VALIDATION ERROR] Line 686: Missing product_id
+2026-08-05 12:55:09,974 | logger | [VALIDATION ERROR] Line 722: Missing dealer_id
+2026-08-05 12:55:09,976 | logger | [JSON ERROR] Line 904: Expecting ',' delimiter: line 2 column 1 (char 246)
+2026-08-05 12:55:09,977 | logger | [JSON ERROR] Line 984: Expecting ',' delimiter: line 2 column 1 (char 246)
+2026-08-05 12:55:09,978 | logger | [VALIDATION ERROR] Line 1106: Missing dealer_id
+2026-08-05 12:55:09,979 | logger | [VALIDATION ERROR] Line 1240: Missing product_id
+2026-08-05 12:55:09,981 | logger | [VALIDATION ERROR] Line 1434: Missing dealer_id
+2026-08-05 12:55:09,981 | logger | STAGE = TRANSFORM | SUCCESSFULLY CREATED CLEAN AND REJECTED SALES LOGS
+2026-08-05 12:55:09,982 | logger | [INFO] PIPELINE COMPLETED SUCCESSFULLY
+2026-08-05 12:55:09,982 | logger | [TIMER] Total execution: 7.49s
+2026-08-05 13:42:59,769 | logger | STAGE = UPLOAD | UPLOADING FILE:extracted/dealers.csv
+2026-08-05 13:43:01,124 | logger | STAGE = INGEST | SUCCESSFULLY UPLOADED extracted/dealers.csv
+2026-08-05 13:43:01,134 | logger | STAGE = UPLOAD | UPLOADING FILE:extracted/products.csv
+2026-08-05 13:43:02,508 | logger | STAGE = INGEST | SUCCESSFULLY UPLOADED extracted/products.csv
+2026-08-05 13:43:02,519 | logger | STAGE = UPLOAD | UPLOADING FILE:extracted/inventory.csv
+2026-08-05 13:43:04,297 | logger | STAGE = INGEST | SUCCESSFULLY UPLOADED extracted/inventory.csv

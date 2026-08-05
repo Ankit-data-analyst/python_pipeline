@@ -45,3 +45,11 @@ SUMMARY_SALES_LOGS_FILE = root_path+"data/processed_data/summary/sales_logs_summ
 HOST = "localhost"
 USER_DATABASE = "python_bootcamp"
 PORT = 5432
+
+EXTRACTED_DEALER_FILE = root_path+'data/processed_data/clean/extracted_dealer.csv'
+EXTRACTED_INVENTORY_FILE = root_path+'data/processed_data/clean/extracted_inventory.csv'
+EXTRACTED_PRODUCTS_FILE = root_path+'data/processed_data/clean/extracted_products.csv'
+
+EXTRACT_DEALER_KEY = 'extracted/dealers.csv'
+EXTRACT_PRODUCTS_KEY = 'extracted/products.csv'
+EXTRACT_INVENTORY_KEY = 'extracted/inventory.csv'
