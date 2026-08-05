@@ -7,7 +7,24 @@ from config import PRODUCT_LOCAL_FILE, CLEAN_PRODUCT_FILE, REJECT_PRODUCT_FILE, 
 from config import INVENTORY_LOCAL_FILE, CLEAN_INVENTORY_FILE, REJECT_INVENTORY_FILE, SUMMARY_INVENTORY_FILE
 from config import SALES_LOCAL_FILE, CLEAN_SALES_LOGS_FILE, REJECT_SALES_LOGS_FILE, SUMMARY_SALES_LOGS_FILE
 
- 
+def write_summary(
+    summary_file,
+    total_records,
+    clean_records,
+    rejected_records,
+    error_summary,
+    status="SUCCESS"
+):
+    summary = {
+        "Total_Records": total_records,
+        "Clean_Records": clean_records,
+        "Rejected_Records": rejected_records,
+        "Errors": error_summary,
+        "Status": status,
+        "Timestamp": datetime.now().isoformat()
+    }
+
+    json.dump(summary, summary_file, indent=4)
 
 def safe_int(value):
     try:
@@ -16,15 +33,15 @@ def safe_int(value):
         return None
     
 def get_dealer_product_ids():
-    dealer_ids = []
-    product_ids = []
+    dealer_ids = set()
+    product_ids = set()
     with open(CLEAN_DEALER_FILE,'r') as f_read,open(CLEAN_PRODUCT_FILE,'r') as f:
         dealer_reader = csv.DictReader(f_read)
         product_reader = csv.DictReader(f)
         for row in dealer_reader:
-            dealer_ids.append(safe_int(row.get('dealer_id')))
+            dealer_ids.add(safe_int(row.get('dealer_id')))
         for row in product_reader:
-            product_ids.append(safe_int(row.get('product_id')))
+            product_ids.add(safe_int(row.get('product_id')))
     return dealer_ids,product_ids
 
 def load_csv(path):
@@ -32,18 +49,20 @@ def load_csv(path):
         data = csv.DictReader(f)
         return list(data),data.fieldnames
     
-def normalize_null(str):
-    if str is None:
+def normalize_null(value):
+    if value is None:
         return None
     
-    str = str.strip()
+    value = value.strip()
     
-    if str.upper() in {'NA','NONE',''}:
+    if value.upper() in {'NA','NONE',''}:
         return None
-    return str
+    return value
     
-def strip_whitespace(str):
-    return str.strip()
+def strip_whitespace(value):
+    if value is None:
+        return None
+    return value.strip()
 
 def safe_float(value):
     try:
@@ -111,7 +130,7 @@ def validate_dealer(row):
 
     def check_range(row):
         errors = []
-        credit_terms_days = int(row.get('credit_terms_days'))
+        credit_terms_days = safe_int(row.get('credit_terms_days'))
         if credit_terms_days<0:
             errors.append('E003')
             log_error(f'STAGE = TRANSFORM | credit terms days should not be less than zero')
@@ -119,7 +138,6 @@ def validate_dealer(row):
             
     def check_date(row):
         errors = []
-        created_date = row.get('created_date')
         try:
             created_date = row.get('created_date')
             if created_date:
@@ -162,7 +180,7 @@ def transform_dealer():
         clean_count = 0
         reject_count = 0
         errors = []
-        summary = {}
+        error_summary = {}
         dealer_ids = []
         log_info(f'STAGE = TRANSFORM | VALIDATING DEALER RECORDS')
         for row in reader:
@@ -173,18 +191,14 @@ def transform_dealer():
                 clean_count+=1
                 dealer_ids.append(clean_row['dealer_id'])
             else:
-                row['Errors'] = error
+                clean_row['Errors'] = error
                 reject_writer.writerow(clean_row)
                 reject_count+=1
                 errors.extend(error)
         log_info(f'STAGE = TRANSFORM | SUCCESSFULLY VALIDATED DEALER RECORDS')
-        summary['Total_Records'] = clean_count+reject_count
-        summary['Clean_Records'] = clean_count
-        summary['Rejected Records'] = reject_count
-        summary['Errors'] = errors
-        summary['status'] = "SUCCESS",
-        summary['timestamp'] = datetime.now().isoformat()
-        json.dump(summary,f_summary,indent = 4)
+        for code in errors:
+            error_summary[code] = error_summary.get(code,0)+1
+        write_summary(f_summary,clean_count+reject_count,clean_count,reject_count,error_summary,"SUCCESS")
         log_info(f'STAGE = TRANSFORM | SUCCESSFULLY CREATED CLEAN AND REJECTED RECORDS FOR DEALER FILE')
 
 
@@ -311,7 +325,7 @@ def transform_product():
         clean_count = 0
         reject_count = 0
         errors = []
-        summary = {}
+        error_summary = {}
         product_ids = []
         log_info(f'STAGE = TRANSFORM | VALIDATING PRODUCT RECORDS')
         for row in reader:
@@ -322,18 +336,14 @@ def transform_product():
                 clean_count+=1
                 product_ids.append(clean_row['product_id'])
             else:
-                row['Errors'] = error
+                clean_row['Errors'] = error
                 reject_writer.writerow(clean_row)
                 reject_count+=1
                 errors.extend(error)
         log_info(f'STAGE = TRANSFORM | SUCCESSFULLY VALIDATED PRODUCT RECORDS')
-        summary['Total_Records'] = clean_count+reject_count
-        summary['Clean_Records'] = clean_count
-        summary['Rejected Records'] = reject_count
-        summary['Errors'] = errors
-        summary['status'] = "SUCCESS",
-        summary['timestamp'] = datetime.now().isoformat()
-        json.dump(summary,f_summary,indent = 4)
+        for code in errors:
+            error_summary[code] = error_summary.get(code,0)+1
+        write_summary(f_summary,clean_count+reject_count,clean_count,reject_count,error_summary,'SUCCESS')
         log_info(f'STAGE = TRANSFORM | SUCCESSFULLY CLEAN AND REJECTED RECORDS FOR PRODUCT FILE')
 
 
@@ -463,28 +473,34 @@ def transform_inventory():
         clean_count = 0
         reject_count = 0
         errors = []
-        summary = {}
+        error_summary = {}
+        seen_inventory_id = set()
         log_info(f'STAGE = TRANSFORM | VALIDATING INVENTORY RECORDS')
         for row in reader:
                 
             clean_row,error = validate_inventory(row)
-            
+            inventory_id = clean_row.get("inventory_id")
+
+            if inventory_id is not None:
+                if inventory_id in seen_inventory_id:
+                    error.append("E030")
+                    log_error(
+                        f"STAGE = TRANSFORM | Duplicate inventory_id {inventory_id} found in input file"
+                    )
+                else:
+                    seen_inventory_id.add(inventory_id)
             if len(error)==0:
                 clean_writer.writerow(clean_row)
                 clean_count+=1
             else:
-                row['Errors'] = error
+                clean_row['Errors'] = error
                 reject_writer.writerow(clean_row)
                 reject_count+=1
                 errors.extend(error)
         log_info(f'STAGE = TRANSFORM | VALIDATION COMPLETED FOR INVENTORY RECORDS')
-        summary['Total_Records'] = clean_count+reject_count
-        summary['Clean_Records'] = clean_count
-        summary['Rejected Records'] = reject_count
-        summary['Errors'] = errors
-        summary['status'] = "SUCCESS",
-        summary['timestamp'] = datetime.now().isoformat()
-        json.dump(summary,f_summary,indent = 4)
+        for code in errors:
+            error_summary[code] = error_summary.get(code,0)+1
+        write_summary(f_summary,clean_count+reject_count,clean_count,reject_count,error_summary,"SUCCESS")
         log_info(f'STAGE = TRANSFORM | SUCCESSFULLY CREATED CLEAN AND REJECTED RECORDS FOR INVENTORY')
         
 #---------------------------------------------------------------------
@@ -533,7 +549,7 @@ def transform_sales_logs():
         summary['Processed_Records'] = processed
         summary['Malformed JSON'] = malformed_json
         summary['Validation_Failures'] = validation_failed
-        summary['status'] = "SUCCESS",
+        summary['status'] = "SUCCESS"
         summary['timestamp'] = datetime.now().isoformat()
         json.dump(summary,f_summary)
         log_info(f'STAGE = TRANSFORM | SUCCESSFULLY CREATED CLEAN AND REJECTED SALES LOGS')

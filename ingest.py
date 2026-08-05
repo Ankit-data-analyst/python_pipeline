@@ -8,7 +8,7 @@ from config import BUCKET_NAME, DEALER_S3_KEY, DEALER_LOCAL_FILE
 from config import PRODUCT_S3_KEY, PRODUCT_LOCAL_FILE
 from config import INVENTORY_S3_KEY, INVENTORY_LOCAL_FILE
 from config import SALES_S3_KEY, SALES_LOCAL_FILE
-from config import HOST,DATABASE,PORT
+from config import HOST,USER_DATABASE,PORT
 from logger import log_info,log_error
 import time
 from functools import wraps
@@ -71,7 +71,7 @@ def connect_database():
     log_info(f"STAGE = INGEST | ESTABLISHING CONNECTION WITH THE DATABASE")
     connection = psycopg2.connect(
             host = HOST,
-            database = DATABASE,
+            database = USER_DATABASE,
             user  = os.getenv('USER_DB'),
             password = os.getenv('PASSWORD'),
             port = int(PORT)

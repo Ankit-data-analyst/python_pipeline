@@ -2,7 +2,7 @@ import os
 import psycopg2
 from dotenv import load_dotenv
 import csv
-from config import CLEAN_DEALER_FILE,CLEAN_PRODUCT_FILE,CLEAN_INVENTORY_FILE
+from config import CLEAN_DEALER_FILE,CLEAN_PRODUCT_FILE,CLEAN_INVENTORY_FILE, HOST, USER_DATABASE, PORT
 from functools import wraps
 import time
 from logger import log_error,log_info,log_warning
@@ -45,11 +45,11 @@ def retry(max_attempts=3, delay=2):
 @retry()
 def connect_database():
     connection = psycopg2.connect(
-            host = os.getenv('HOST'),
-            database = os.getenv('DATABASE'),
+            host = HOST,
+            database =USER_DATABASE,
             user  = os.getenv('USER_DB'),
             password = os.getenv('PASSWORD'),
-            port = int(os.getenv('PORT',5432))
+            port = int(PORT)
         )
     return connection
 
@@ -87,7 +87,6 @@ def insert_dealer():
         with connection.cursor() as cursor:
             cursor.execute(sql,(dealer_id,  dealer_code, dealer_name, city, state, region, dealer_type,created_date,is_active,email,phone, credit_terms_days))
         
-        cursor.close()
     log_info(f'STAGE = LOAD | LOADING DATA INTO DEALER TABLE')
     def insert_data_into_dealer(connection):
         try:
@@ -223,4 +222,4 @@ def insert_inventory():
             raise
     cursor.close()
     connection.close()
-insert_inventory()
+# insert_inventory()

@@ -42,6 +42,6 @@ CLEAN_SALES_LOGS_FILE =  root_path+"data/processed_data/clean/clean_sales_logs.j
 REJECT_SALES_LOGS_FILE = root_path+"data/processed_data/rejected/reject_sales_logs.jsonl"
 SUMMARY_SALES_LOGS_FILE = root_path+"data/processed_data/summary/sales_logs_summary.json"
 
-HOST="localhost"
-DATABASE="python_bootcamp"
-PORT=5432
+HOST = "localhost"
+USER_DATABASE = "python_bootcamp"
+PORT = 5432

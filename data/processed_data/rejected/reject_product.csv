@@ -1,9 +1,9 @@
 product_id,sku,product_name,category,subcategory,brand,uom,unit_cost,unit_price,weight_kg,is_discontinued,created_date,Errors
-27,,Air Filter XL - BrandC Series-3,AIR_FILTER,AIR_XL,BrandC,EA,8.95,7.2,0.6,false,2022-07-30,
-50,SKU-OF-00050,Oil Filter S - BrandH Max,OIL_FILTER,OIL_S,BrandH,EA,7.61,NA,0.99,false,2025-06-17,
-77,SKU-TF-00077,,TRANSMISSION_FILTER,TRANSMISSION_S,BrandE,EA,22.49,26.99,1.12,false,2025-02-22,
-90,SKU-OF-00090,Oil Filter XL - BrandD Max,OIL_FILTER,OIL_XL,BrandD,EA,11.19,NA,1.14,false,2024-01-06,
-189,,Transmission Filter L - BrandG Series-2,TRANSMISSION_FILTER,TRANSMISSION_L,BrandG,EA,10.43,14.08,1.44,false,2022-02-10,
-209,SKU-OF-00209,Oil Filter M - BrandE Max,OIL_FILTER,OIL_M,BrandE,EA,"12,50","12,50",1.03,false,2025-09-29,
-211,SKU-CF-00211,Cabin Filter S - BrandD Series-1,CABIN_FILTER,CABIN_S,BrandD,EA,11.22,NA,0.83,false,2022-08-04,
-279,SKU-EF-00279,Engine Filter M - BrandB Series-3,ENGINE_FILTER,ENGINE_M,BrandB,EA,16.39,NA,0.89,true,2023-08-16,
+27,,Air Filter XL - BrandC Series-3,AIR_FILTER,AIR_XL,BrandC,EA,8.95,7.2,0.6,false,2022-07-30,['EOO7']
+50,SKU-OF-00050,Oil Filter S - BrandH Max,OIL_FILTER,OIL_S,BrandH,EA,7.61,NA,0.99,false,2025-06-17,['E009']
+77,SKU-TF-00077,,TRANSMISSION_FILTER,TRANSMISSION_S,BrandE,EA,22.49,26.99,1.12,false,2025-02-22,['EOO8']
+90,SKU-OF-00090,Oil Filter XL - BrandD Max,OIL_FILTER,OIL_XL,BrandD,EA,11.19,NA,1.14,false,2024-01-06,['E009']
+189,,Transmission Filter L - BrandG Series-2,TRANSMISSION_FILTER,TRANSMISSION_L,BrandG,EA,10.43,14.08,1.44,false,2022-02-10,['EOO7']
+209,SKU-OF-00209,Oil Filter M - BrandE Max,OIL_FILTER,OIL_M,BrandE,EA,"12,50","12,50",1.03,false,2025-09-29,"['E009', 'E009']"
+211,SKU-CF-00211,Cabin Filter S - BrandD Series-1,CABIN_FILTER,CABIN_S,BrandD,EA,11.22,NA,0.83,false,2022-08-04,['E009']
+279,SKU-EF-00279,Engine Filter M - BrandB Series-3,ENGINE_FILTER,ENGINE_M,BrandB,EA,16.39,NA,0.89,true,2023-08-16,['E009']

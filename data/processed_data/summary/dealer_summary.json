@@ -1,12 +1,10 @@
 {
     "Total_Records": 80,
     "Clean_Records": 79,
-    "Rejected Records": 1,
-    "Errors": [
-        "EOO2"
-    ],
-    "status": [
-        "SUCCESS"
-    ],
-    "timestamp": "2026-08-03T16:13:41.171115"
+    "Rejected_Records": 1,
+    "Errors": {
+        "EOO2": 1
+    },
+    "Status": "SUCCESS",
+    "Timestamp": "2026-08-05T09:13:32.203260"
 }

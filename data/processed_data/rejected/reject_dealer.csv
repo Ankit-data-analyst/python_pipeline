@@ -1,2 +1,2 @@
 dealer_id,dealer_code,dealer_name,city,state,region,dealer_type,created_date,is_active,email,phone,credit_terms_days,Errors
-37,DLR-00037,,Kolkata,WB,EAST,RETAIL,2024-01-16,true,dealer37@example.com,+91-9307075048,15,
+37,DLR-00037,,Kolkata,WB,EAST,RETAIL,2024-01-16,true,dealer37@example.com,+91-9307075048,15,['EOO2']
