@@ -375,6 +375,7 @@ def validate_inventory(row):
         
         
         return clean
+    
 
     row = clean_row(row)
 
